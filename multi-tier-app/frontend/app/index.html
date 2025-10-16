@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Multi-Tier App - Frontend</title>
+</head>
+<body>
+  <h1>Multi-Tier App (Frontend)</h1>
+  <p id="msg">Loading message from backend…</p>
+  <script>
+    async function fetchMessage() {
+      try {
+        const res = await fetch('/api/message'); // proxied by Nginx to backend
+        const text = await res.text();
+        document.getElementById('msg').innerText = text;
+      } catch (err) {
+        document.getElementById('msg').innerText = 'Error contacting backend: ' + err;
+      }
+    }
+    fetchMessage();
+  </script>
+</body>
+</html>
